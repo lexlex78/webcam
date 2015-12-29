@@ -1,25 +1,29 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/* 
- * File:   main.cpp
- * Author: alexey
- *
- * Created on 29 декабря 2015 г., 12:33
- */
-
-#include <cstdlib>
+#include <iostream>
+#include "videodevice.h"
 
 using namespace std;
 
-/*
- * 
- */
-int main(int argc, char** argv) {
+int main(int argc,char* argv[])
+{
+    string dev_name = "/dev/video0";
+
+    string file_name = "1.raw";
+
+    if (argc>1)
+    {
+        dev_name = argv[1];
+
+        if (argc > 2)
+            file_name = argv[2];
+    }
+
+    videodevice *vd = new videodevice();
+
+    vd->openDevice(dev_name);
+
+    vd->getFrame(file_name);
+
+    vd->closeDevice();
 
     return 0;
 }
-
